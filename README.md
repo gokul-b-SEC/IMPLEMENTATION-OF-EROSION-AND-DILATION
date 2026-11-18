@@ -1,0 +1,110 @@
+# EX-09: Implementation of Erosion and Dilation using OpenCV
+
+## Aim
+
+To write a Python program using OpenCV to perform morphological operations such as Erosion and Dilation on an image.
+
+### Operations Performed
+1. Image Erosion
+2. Image Dilation
+
+## Software Used
+
+- Anaconda – Python 3.7
+- Jupyter Notebook / VS Code
+- OpenCV (`cv2`)
+- NumPy
+- Matplotlib
+
+## Algorithm
+
+**Step 1:** Import the required libraries: OpenCV, NumPy, and Matplotlib.
+
+**Step 2:** Create a blank image using NumPy.
+
+**Step 3:** Insert text onto the image using OpenCV's text drawing function.
+
+**Step 4:** Display the original image.
+
+**Step 5:** Create a structuring element (kernel) of suitable size.
+
+**Step 6: Image Erosion**
+- Apply the erosion operation using the created kernel.
+- Remove pixels from the boundaries of foreground objects.
+- Display the eroded image.
+
+**Step 7: Image Dilation**
+- Apply the dilation operation using the same kernel.
+- Add pixels to the boundaries of foreground objects.
+- Display the dilated image.
+
+**Step 8:** Compare the original, eroded, and dilated images.
+
+## Program
+
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a blank image
+image = np.zeros((500, 500, 3), dtype=np.uint8)
+
+# Insert text into the image
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(
+    image, 'HELLO WORLD', (100, 250),
+    font, 1, (255, 255, 255), 2, cv2.LINE_AA
+)
+
+# Display the original image
+plt.subplot(1, 3, 1)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("Input Image with Text")
+plt.axis('off')
+
+# Create a 3x3 kernel
+kernel = np.ones((3, 3), np.uint8)
+
+# Image Erosion
+eroded_image = cv2.erode(image, kernel, iterations=1)
+
+plt.subplot(1, 3, 2)
+plt.imshow(cv2.cvtColor(eroded_image, cv2.COLOR_BGR2RGB))
+plt.title("Eroded Image")
+plt.axis('off')
+
+# Image Dilation
+dilated_image = cv2.dilate(image, kernel, iterations=1)
+
+plt.subplot(1, 3, 3)
+plt.imshow(cv2.cvtColor(dilated_image, cv2.COLOR_BGR2RGB))
+plt.title("Dilated Image")
+plt.axis('off')
+
+# Display all results
+plt.tight_layout()
+plt.show()
+```
+
+## Output
+
+The following images show the results of the morphological operations.
+
+### 1. Original Image
+
+<img width="407" height="275" alt="image" src="https://github.com/user-attachments/assets/9e2b3df4-95f0-405f-8c68-686bcc75f8e4" />
+
+
+### 2. Eroded Image
+
+<img width="401" height="272" alt="image" src="https://github.com/user-attachments/assets/6175c4fc-96d2-4829-929d-661987b76d9e" />
+
+
+### 3. Dilated Image
+
+<img width="397" height="272" alt="image" src="https://github.com/user-attachments/assets/8648a165-1b24-4c84-960a-e880603f9bbb" />
+
+## Result
+
+Thus, the morphological operations Erosion and Dilation are successfully implemented using OpenCV. Erosion reduces the boundaries of foreground objects, while Dilation expands them.
